@@ -65,20 +65,24 @@ export function Inquiries() {
   };
 
   return (
-    <div className="flex flex-col items-center p-4">
-      <h1 className="text-2xl font-bold mb-6">Inquiries</h1>
+    <div className="flex flex-col items-center bg-[#EDE8F5] rounded-lg p-6">
+      <h1 className="text-2xl font-bold mb-6 text-[#3D52A0]">Inquiries</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md space-y-6">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-[#3D52A0]">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="you@example.com" {...field} />
+                  <Input 
+                    placeholder="you@example.com" 
+                    {...field} 
+                    className="border-[#7091E6] focus:border-[#3D52A0]"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
@@ -87,17 +91,21 @@ export function Inquiries() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel className="text-[#3D52A0]">Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your username" {...field} />
+                  <Input 
+                    placeholder="Your username" 
+                    {...field} 
+                    className="border-[#7091E6] focus:border-[#3D52A0]"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
           <Button 
             type="submit" 
-            className="w-full bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
+            className="w-full bg-[#3D52A0] text-white hover:bg-[#7091E6] transition duration-200"
           >
             Submit
           </Button>
@@ -105,28 +113,34 @@ export function Inquiries() {
       </Form>
 
       <AlertDialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-        <AlertDialogContent className="bg-white dark:bg-gray-800">
+        <AlertDialogContent className="bg-[#EDE8F5]">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-gray-900 dark:text-gray-100">
+            <AlertDialogTitle className="text-[#3D52A0]">
               Confirm Submission
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-gray-600 dark:text-gray-300">
-              Are you sure you want to submit this inquiry? Please verify your information:
-              {formData && (
-                <div className="mt-2 text-sm bg-gray-50 dark:bg-gray-700 p-3 rounded-md">
-                  <p className="mb-1"><span className="font-medium">Email:</span> {formData.email}</p>
-                  <p><span className="font-medium">Username:</span> {formData.username}</p>
-                </div>
-              )}
+            <AlertDialogDescription asChild>
+              <div className="text-black">
+                <span>Are you sure you want to submit this inquiry? Please verify your information:</span>
+                {formData && (
+                  <div className="mt-2 text-sm bg-white p-3 rounded-md">
+                    <div className="mb-1">
+                      <span className="font-medium">Email:</span> {formData.email}
+                    </div>
+                    <div>
+                      <span className="font-medium">Username:</span> {formData.username}
+                    </div>
+                  </div>
+                )}
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
+            <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200">
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction 
               onClick={handleConfirm}
-              className="bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+              className="bg-[#3D52A0] text-white hover:bg-[#7091E6]"
             >
               Submit
             </AlertDialogAction>

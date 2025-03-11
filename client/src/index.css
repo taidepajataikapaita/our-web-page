@@ -9,17 +9,6 @@
     @apply border-border outline-ring/50;
   }
 
-  /* Light theme styles */
-  .light {
-    @apply bg-white text-black; /* Background and text color for light theme */
-  }
-
-  /* Dark theme styles */
-  .dark {
-    @apply bg-gray-900 text-white; /* Background and text color for dark theme */
-  }
-
-  /* General body styles */
   body {
     @apply bg-background text-foreground; /* Default styles */
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
