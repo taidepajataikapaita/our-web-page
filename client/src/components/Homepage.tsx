@@ -5,10 +5,10 @@ const Homepage = () => {
         Hei!
       </h1>
       <div className="prose prose-lg max-w-none">
-        <p className="text-[#7091E6] mb-6 leading-relaxed">
+        <p className="text-[#7091E6] mb-6 leading-relaxed font-semibold">
           Me olemme Taikapaita – taidepaja, joka muuttaa lasten mestariteokset unohtumattomiksi muistoiksi!
         </p>
-        <div className="text-black space-y-4">
+        <div className="text-black space-y-4 font-medium">
           <p>
             Kuvittele, että lapsesi piirustus muuttuu ainutlaatuiseksi lahjaksi, joka säilyttää luovuuden ja ilon taian. Tulostamme nämä arvokkaat teokset pehmeille, 100 % puuvillaisille T-paidoille DTG-tulostuksella, joka varmistaa, että jokainen väri ja yksityiskohta loistaa kauniisti.
           </p>
