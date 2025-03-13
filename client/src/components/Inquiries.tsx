@@ -27,6 +27,7 @@ import {
 import { useState } from "react";
 import { inquiriesService } from '@/services/inquiriesService';
 import { Textarea } from "@/components/ui/textarea";
+import { useTranslation } from "react-i18next";
 
 // Define the schema for validation
 const FormSchema = z.object({
@@ -36,6 +37,8 @@ const FormSchema = z.object({
 });
 
 export function Inquiries() {
+    const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -78,7 +81,7 @@ export function Inquiries() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[#3D52A0] font-semibold">Your Name</FormLabel>
+                  <FormLabel className="text-[#3D52A0] font-semibold">{t('feedback-your-name')}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Your Name"
@@ -96,7 +99,7 @@ export function Inquiries() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[#3D52A0] font-semibold">Your Email</FormLabel>
+                  <FormLabel className="text-[#3D52A0] font-semibold">{t('feedback-your-email')}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="your.email@example.com"
@@ -115,7 +118,7 @@ export function Inquiries() {
               name="feedback"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[#3D52A0] font-semibold">Your Feedback</FormLabel>
+                  <FormLabel className="text-[#3D52A0] font-semibold">{t('feedback-your-feedback')}</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Please share your thoughts with us..."
@@ -133,7 +136,7 @@ export function Inquiries() {
               className="w-full bg-[#3D52A0] text-white hover:bg-[#7091E6] transition duration-200
               py-3 text-lg font-semibold rounded-md shadow-sm hover:shadow-md"
             >
-              Send us the message
+              {t('feedback-send-feedback-button')}
             </Button>
           </form>
         </Form>

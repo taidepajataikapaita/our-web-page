@@ -14,13 +14,13 @@ const Homepage = () => {
         </p>
         <div className="text-black space-y-4 font-medium">
           <p>
-            {t('about-us-details')}
+            {t('about-us-details-1')}
           </p>
           <p>
-            Yrittäjähenkisinä opiskelijoina uskomme vahvasti siihen, että lasten luovuuden kannustaminen ja kyky ilmaista itseään taiteellisten aktiviteettien kautta on äärimmäisen tärkeää. Suosituin tapahtumamme, "T-paita paja", innostaa lapset luomaan taideteoksia paperille, jotka skannaamme ja muunnamme korkealaatuisiksi grafiikoiksi. Nämä tulostetaan ammattimaisesti suoraan premium-laatuisille puuvillaisille T-paidoille, tehden jokaisesta teoksesta puettavan.
+            {t('about-us-details-2')}
           </p>
           <p>
-            Se, että näkee vanhemman ylpeästi käyttävän T-paitaa, jossa on lapsensa taideteos, voi syvästi vahvistaa lapsen itsetuntoa. Samalla on erittäin merkityksellistä, että lapsi voi ilmaista itseään päivittäin pukeutumalla paitaan, joka esittelee hänen omaa luomustaan. Siksi tarjoammekin paitoja joka koossa– jotta jokainen nuori taiteilija voi ylpeästi kantaa omaa ainutlaatuista visiotaan!
+            {t('about-us-details-3')}
           </p>
         </div>
       </div>
