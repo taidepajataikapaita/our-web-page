@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +8,27 @@ import {
 import { Menu } from 'lucide-react';
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname === path) return true;
+    return false;
+  };
+
+  const getLinkClass = (path: string) => {
+    const baseClass = "text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-200";
+    return isActive(path)
+      ? `${baseClass} bg-[#7091E6] border-b-2 border-white`
+      : `${baseClass} hover:bg-[#7091E6]`;
+  };
+
+  const getMobileLinkClass = (path: string) => {
+    const baseClass = "w-full px-4 py-2 text-sm text-[#3D52A0] font-medium transition-all duration-200";
+    return isActive(path)
+      ? `${baseClass} bg-[#EDE8F5] border-l-4 border-[#3D52A0]`
+      : `${baseClass} hover:bg-[#EDE8F5]`;
+  };
 
   return (
     <nav className="bg-[#3D52A0] p-4 shadow-md">
@@ -21,25 +42,25 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link
             to="/"
-            className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#7091E6] transition-colors duration-200"
+            className={getLinkClass('/')}
           >
             About us
           </Link>
           <Link
             to="/workshops"
-            className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#7091E6] transition-colors duration-200"
+            className={getLinkClass('/workshops')}
           >
             Workshops
           </Link>
           <Link
             to="/inquiries"
-            className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#7091E6] transition-colors duration-200"
+            className={getLinkClass('/inquiries')}
           >
             Give Us Feedback
           </Link>
           <Link
             to="/contact"
-            className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#7091E6] transition-colors duration-200"
+            className={getLinkClass('/contact')}
           >
             Contact Us
           </Link>
@@ -60,7 +81,7 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link 
                   to="/" 
-                  className="w-full px-4 py-2 text-sm hover:bg-[#EDE8F5] text-[#3D52A0] font-medium"
+                  className={getMobileLinkClass('/')}
                 >
                   About us
                 </Link>
@@ -68,7 +89,7 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link 
                   to="/workshops" 
-                  className="w-full px-4 py-2 text-sm hover:bg-[#EDE8F5] text-[#3D52A0] font-medium"
+                  className={getMobileLinkClass('/workshops')}
                 >
                   Workshops
                 </Link>
@@ -76,7 +97,7 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link 
                   to="/inquiries" 
-                  className="w-full px-4 py-2 text-sm hover:bg-[#EDE8F5] text-[#3D52A0] font-medium"
+                  className={getMobileLinkClass('/inquiries')}
                 >
                   Give Us Feedback
                 </Link>
@@ -84,7 +105,7 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link 
                   to="/contact" 
-                  className="w-full px-4 py-2 text-sm hover:bg-[#EDE8F5] text-[#3D52A0] font-medium"
+                  className={getMobileLinkClass('/contact')}
                 >
                   Contact Us
                 </Link>

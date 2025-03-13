@@ -53,9 +53,9 @@ export function Inquiries() {
   const handleConfirm = async () => {
     try {
       if (!formData) return;
-      
+
       await inquiriesService.submitInquiry(formData);
-      
+
       toast.success("Your information has been submitted successfully!");
       setDialogOpen(false);
       form.reset();
@@ -77,9 +77,9 @@ export function Inquiries() {
                 <FormItem>
                   <FormLabel className="text-[#3D52A0] font-semibold">Email</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="you@example.com" 
-                      {...field} 
+                    <Input
+                      placeholder="your.email@example.com"
+                      {...field}
                       className="border-2 border-[#7091E6] focus-visible:ring-[#3D52A0] rounded-md px-4 py-2 transition-colors
                       focus:border-[#3D52A0] hover:border-[#3D52A0]"
                     />
@@ -95,9 +95,9 @@ export function Inquiries() {
                 <FormItem>
                   <FormLabel className="text-[#3D52A0] font-semibold">Username</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Your username" 
-                      {...field} 
+                    <Input
+                      placeholder="Your username"
+                      {...field}
                       className="border-2 border-[#7091E6] focus-visible:ring-[#3D52A0] rounded-md px-4 py-2 transition-colors
                       focus:border-[#3D52A0] hover:border-[#3D52A0]"
                     />
@@ -106,8 +106,8 @@ export function Inquiries() {
                 </FormItem>
               )}
             />
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-[#3D52A0] text-white hover:bg-[#7091E6] transition duration-200
               py-3 text-lg font-semibold rounded-md shadow-sm hover:shadow-md"
             >
@@ -143,7 +143,7 @@ export function Inquiries() {
             <AlertDialogCancel className="bg-gray-100 hover:bg-gray-200 font-medium px-6">
               Cancel
             </AlertDialogCancel>
-            <AlertDialogAction 
+            <AlertDialogAction
               onClick={handleConfirm}
               className="bg-[#3D52A0] text-white hover:bg-[#7091E6] font-medium px-6"
             >
