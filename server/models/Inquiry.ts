@@ -1,15 +1,21 @@
 import mongoose from 'mongoose';
 
 const inquirySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
     trim: true,
   },
-  username: {
+  feedback: {
     type: String,
     required: true,
     trim: true,
+    minlength: 10,
   },
   createdAt: {
     type: Date,
