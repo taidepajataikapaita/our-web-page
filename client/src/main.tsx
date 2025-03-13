@@ -1,9 +1,10 @@
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { Toaster } from 'sonner'
+import './i18n'
 
-createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <>
       <App />
       <Toaster richColors position="top-center" />
