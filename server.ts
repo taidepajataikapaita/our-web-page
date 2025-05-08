@@ -1,9 +1,6 @@
-import express from 'express';
-import type { Express, RequestHandler, ErrorRequestHandler } from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import express, { Express, Request, Response, RequestHandler } from 'express';
+import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import middleware from './utils/middleware';
@@ -18,11 +15,16 @@ const app: Express = express();
 // MongoDB connection
 const mongoUrl = config.MONGODB_URI;
 mongoose.connect(mongoUrl)
-    .then(() => logger.info('MongoDB connected'))
-    .catch((err) => logger.error('MongoDB connection error:', err));
+    .then(() => {
+        logger.info('MongoDB connected');
+    })
+    .catch((err) => {
+        logger.error('MongoDB connection error:', err);
+    });
 
 // Middleware
-app.use(cors(), bodyParser.json(), middleware.requestLogger);
+app.use(express.json());
+app.use(middleware.requestLogger);
 
 // API Routes
 app.use('/api/inquiries', inquiryRoutes);
@@ -34,20 +36,19 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Handle client-side routing - serve index.html for all non-API routes
-const handleClientRouting: RequestHandler = (req, res, next) => {
+app.get('*', ((req: Request, res: Response) => {
   if (req.path.startsWith('/api/')) {
-    res.status(404).json({ error: 'Not found' });
-    return;
+    return res.status(404).json({ error: 'Not found' });
   }
   res.sendFile(path.join(__dirname, '/client/dist/index.html'));
-};
-
-app.get('*', handleClientRouting);
+}) as RequestHandler);
 
 // Error handling
-app.use(middleware.unknownEndpoint as unknown as ErrorRequestHandler);
-app.use(middleware.errorHandler as unknown as ErrorRequestHandler);
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
 
 // Start the server
 const PORT = config.PORT || 3000;
-app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  logger.info(`Server running on port ${PORT}`);
+});

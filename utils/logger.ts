@@ -1,11 +1,19 @@
-export const info = (...params: any[]): void => {
-  console.log(...params)
+interface Logger {
+  info: (...params: unknown[]) => void;
+  error: (...params: unknown[]) => void;
 }
 
-export const error = (...params: any[]): void => {
-  console.error(...params)
-}
+export const info = (...params: unknown[]): void => {
+  console.log(...params);
+};
 
-export default {
-  info, error
-}
+export const error = (...params: unknown[]): void => {
+  console.error(...params);
+};
+
+const logger: Logger = {
+  info,
+  error
+};
+
+export default logger;

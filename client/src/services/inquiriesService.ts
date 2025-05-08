@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export interface InquiryData {
   name: string;
@@ -81,4 +81,4 @@ class InquiriesService {
   }
 }
 
-export const inquiriesService = new InquiriesService(); 
+export const inquiriesService = new InquiriesService();

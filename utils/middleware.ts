@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, ErrorRequestHandler, RequestHandler } from 'express';
 import logger from './logger';
 
-export const requestLogger = (request: Request, response: Response, next: NextFunction): void => {
+export const requestLogger: RequestHandler = (request: Request, response: Response, next: NextFunction): void => {
   logger.info('Method:', request.method);
   logger.info('Path:  ', request.path);
   logger.info('Body:  ', request.body);
@@ -9,40 +9,47 @@ export const requestLogger = (request: Request, response: Response, next: NextFu
   next();
 };
 
-export const unknownEndpoint = (request: Request, response: Response): void => {
+export const unknownEndpoint: RequestHandler = (request: Request, response: Response): void => {
   response.status(404).send({ error: 'unknown endpoint' });
 };
 
 interface CustomError extends Error {
   name: string;
+  statusCode?: number;
 }
 
-export const errorHandler = (
+export const errorHandler: ErrorRequestHandler = (
   error: CustomError,
   request: Request,
   response: Response,
   next: NextFunction
-): Response | void => {
+): void => {
   logger.error(error.message);
 
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' });
+    response.status(400).send({ error: 'malformatted id' });
+    return;
   }
   if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message });
+    response.status(400).json({ error: error.message });
+    return;
   }
   if (error.name === 'JsonWebTokenError') {
-    return response.status(401).json({ error: 'invalid token' });
+    response.status(401).json({ error: 'invalid token' });
+    return;
   }
   if (error.name === 'TokenExpiredError') {
-    return response.status(401).json({ error: 'token expired' });
+    response.status(401).json({ error: 'token expired' });
+    return;
   }
 
   next(error);
 };
 
-export default {
+const middleware = {
   requestLogger,
   unknownEndpoint,
   errorHandler
-};
+} as const;
+
+export default middleware;
