@@ -15,7 +15,7 @@ const inquirySchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: 10,
+    minlength: 5,
   },
   createdAt: {
     type: Date,
@@ -23,4 +23,4 @@ const inquirySchema = new mongoose.Schema({
   },
 });
 
-export const Inquiry = mongoose.model('Inquiry', inquirySchema); 
+export const Inquiry = mongoose.model('Inquiry', inquirySchema);

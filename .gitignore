@@ -25,5 +25,7 @@ dist-ssr
 
 package-lock.json
 .env
-
+.env
+.env.local
+.env.*.local
 mongo.js

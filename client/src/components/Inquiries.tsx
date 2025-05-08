@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 const FormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Invalid email address." }),
-  feedback: z.string().min(10, { message: "Feedback must be at least 10 characters." }),
+  feedback: z.string().min(5, { message: "Feedback must be at least 5 characters." }),
 });
 
 export function Inquiries() {
