@@ -25,7 +25,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
-import { inquiriesService } from '@/services/inquiriesService';
+import { submitFeedback, FeedbackData } from '@/services/feedbackService';
 import { Textarea } from "@/components/ui/textarea";
 import { useTranslation } from "react-i18next";
 
@@ -36,8 +36,8 @@ const FormSchema = z.object({
   feedback: z.string().min(5, { message: "Feedback must be at least 5 characters." }),
 });
 
-export function Inquiries() {
-    const { t } = useTranslation();
+export function Feedback() {
+  const { t } = useTranslation();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -49,7 +49,7 @@ export function Inquiries() {
   });
 
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [formData, setFormData] = useState<{ name: string; email: string; feedback: string } | null>(null);
+  const [formData, setFormData] = useState<FeedbackData | null>(null);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setFormData(data);
@@ -60,13 +60,13 @@ export function Inquiries() {
     try {
       if (!formData) return;
 
-      await inquiriesService.submitInquiry(formData);
+      await submitFeedback(formData);
 
       toast.success("Your information has been submitted successfully!");
       setDialogOpen(false);
       form.reset();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to submit inquiry');
+      toast.error(error instanceof Error ? error.message : 'Failed to submit feedback');
     }
   };
 
@@ -183,4 +183,4 @@ export function Inquiries() {
       </AlertDialog>
     </div>
   );
-}
+} 

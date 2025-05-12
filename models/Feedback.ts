@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const inquirySchema = new mongoose.Schema({
+const feedbackSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -23,4 +23,4 @@ const inquirySchema = new mongoose.Schema({
   },
 });
 
-export const Inquiry = mongoose.model('Inquiry', inquirySchema);
+export const Feedback = mongoose.model('Feedback', feedbackSchema); 

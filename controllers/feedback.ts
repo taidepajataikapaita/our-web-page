@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { Inquiry } from '../models/Inquiry';
+import { Feedback } from '../models/Feedback';
 
-export const createInquiry = async (req: Request, res: Response) => {
+export const createFeedback = async (req: Request, res: Response) => {
   try {
     const { name, email, feedback } = req.body;
     
@@ -22,18 +22,18 @@ export const createInquiry = async (req: Request, res: Response) => {
       });
     }
 
-    const inquiry = new Inquiry({
+    const feedbackEntry = new Feedback({
       name,
       email,
       feedback,
     });
 
-    await inquiry.save();
+    await feedbackEntry.save();
     
     res.status(201).json({
       success: true,
       message: 'Your message has been sent successfully',
-      data: inquiry,
+      data: feedbackEntry,
     });
   } catch (error) {
     res.status(500).json({
@@ -44,15 +44,15 @@ export const createInquiry = async (req: Request, res: Response) => {
   }
 };
 
-export const getInquiries = async (req: Request, res: Response) => {
+export const getFeedbacks = async (req: Request, res: Response) => {
   try {
-    const inquiries = await Inquiry.find()
+    const feedbacks = await Feedback.find()
       .sort({ createdAt: -1 })
       .select('name email feedback createdAt'); // Specify fields to return
 
     res.status(200).json({
       success: true,
-      data: inquiries,
+      data: feedbacks,
     });
   } catch (error) {
     res.status(500).json({
@@ -63,12 +63,12 @@ export const getInquiries = async (req: Request, res: Response) => {
   }
 };
 
-// Optional: Add a method to get a single inquiry
-export const getInquiryById = async (req: Request, res: Response) => {
+// Optional: Add a method to get a single feedback entry
+export const getFeedbackById = async (req: Request, res: Response) => {
   try {
-    const inquiry = await Inquiry.findById(req.params.id);
+    const feedbackEntry = await Feedback.findById(req.params.id);
     
-    if (!inquiry) {
+    if (!feedbackEntry) {
       return res.status(404).json({
         success: false,
         message: 'Message not found',
@@ -77,7 +77,7 @@ export const getInquiryById = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      data: inquiry,
+      data: feedbackEntry,
     });
   } catch (error) {
     res.status(500).json({

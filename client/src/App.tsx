@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import Navbar from './components/Navbar';
-import { Inquiries } from './components/Inquiries';
+import { Feedback } from './components/Feedback';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Homepage'));
@@ -29,7 +29,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<Home />} />
                 <Route path="/workshops" element={<Workshops />} />
-                <Route path="/inquiries" element={<Inquiries />} />
+                <Route path="/feedback" element={<Feedback />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </Suspense>

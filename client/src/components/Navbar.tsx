@@ -88,7 +88,7 @@ const Navbar = () => {
           <Link to="/workshops" className={getLinkClass('/workshops')}>
             {t('nav-workshops')}
           </Link>
-          <Link to="/inquiries" className={getLinkClass('/inquiries')}>
+          <Link to="/feedback" className={getLinkClass('/feedback')}>
             {t('nav-feedback')}
           </Link>
           <Link to="/contact" className={getLinkClass('/contact')}>
@@ -168,7 +168,7 @@ const Navbar = () => {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/inquiries" className={getMobileLinkClass('/inquiries')}>
+                <Link to="/feedback" className={getMobileLinkClass('/feedback')}>
                   {t('nav-feedback')}
                 </Link>
               </DropdownMenuItem>

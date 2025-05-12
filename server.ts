@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import middleware from './utils/middleware';
 import config from './utils/config';
 import logger from './utils/logger';
-import inquiryRoutes from './routes/inquiryRoutes';
+import feedbackRoutes from './routes/feedbackRoutes';
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 // API Routes
-app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 // Serve static files from the dist directory
 const __filename = fileURLToPath(import.meta.url);
