@@ -54,17 +54,17 @@ const Navbar = () => {
   };
 
   const getLinkClass = (path: string) => {
-    const baseClass = "text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-200";
+    const baseClass = "px-4 py-2 rounded-md text-sm font-medium transition-all duration-200";
     return isActive(path)
-      ? `${baseClass} bg-[#7091E6] border-b-2 border-white`
-      : `${baseClass} hover:bg-[#7091E6]`;
+      ? `${baseClass} bg-[#FF5CBF] text-white font-bold`
+      : `${baseClass} text-[#0074D9] hover:bg-[#FFB6D2] hover:text-white`;
   };
 
   const getMobileLinkClass = (path: string) => {
-    const baseClass = "w-full px-4 py-2 text-sm text-[#3D52A0] font-medium transition-all duration-200";
+    const baseClass = "w-full px-4 py-2 text-sm font-medium transition-all duration-200";
     return isActive(path)
-      ? `${baseClass} bg-[#EDE8F5] border-l-4 border-[#3D52A0]`
-      : `${baseClass} hover:bg-[#EDE8F5]`;
+      ? `${baseClass} bg-[#FFB6D2] text-[#FF5CBF] border-l-4 border-[#FF5CBF]`
+      : `${baseClass} text-[#0074D9] hover:bg-[#FFB6D2] hover:text-[#FF5CBF]`;
   };
 
   // Update language display based on current language
@@ -73,17 +73,21 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#3D52A0] p-4 shadow-md">
+    <nav className="bg-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-white text-xl font-bold">
-          Taidepajataikapaita
+        <Link to="/" className="text-[#FF5CBF] text-xl font-bold flex items-center gap-2">
+          <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+          Taidepaja Taikapaita
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-4">
           <Link to="/" className={getLinkClass('/')}>
             {t('nav-about')}
+          </Link>
+          <Link to="/t-shirt" className={getLinkClass('/t-shirt')}>
+            {t('nav-t-shirt')}
           </Link>
           <Link to="/workshops" className={getLinkClass('/workshops')}>
             {t('nav-workshops')}
@@ -91,16 +95,13 @@ const Navbar = () => {
           <Link to="/feedback" className={getLinkClass('/feedback')}>
             {t('nav-feedback')}
           </Link>
-          <Link to="/contact" className={getLinkClass('/contact')}>
-            {t('nav-contact')}
-          </Link>
 
           {/* Language Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="ml-4 bg-[#EDE8F5] text-[#3D52A0] hover:bg-[#D1D5DB] flex items-center gap-2"
+                className="ml-4 border-[#FF5CBF] text-[#FF5CBF] hover:bg-[#FFB6D2] hover:text-white flex items-center gap-2"
               >
                 <Globe size={16} />
                 {getCurrentLanguageText()}
@@ -111,7 +112,7 @@ const Navbar = () => {
                 <DropdownMenuItem
                   key={item.value}
                   onClick={() => handleLanguageChange(item.value)}
-                  className={`cursor-pointer ${lang === item.value ? 'bg-[#EDE8F5]' : ''}`}
+                  className={`cursor-pointer ${lang === item.value ? 'bg-[#FFB6D2] text-[#FF5CBF]' : ''}`}
                 >
                   {item.text}
                 </DropdownMenuItem>
@@ -128,7 +129,7 @@ const Navbar = () => {
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-[#EDE8F5] text-[#3D52A0] hover:bg-[#D1D5DB] flex items-center gap-2"
+                className="border-[#FF5CBF] text-[#FF5CBF] hover:bg-[#FFB6D2] hover:text-white flex items-center gap-2"
               >
                 <Globe size={16} />
                 {getCurrentLanguageText()}
@@ -139,7 +140,7 @@ const Navbar = () => {
                 <DropdownMenuItem
                   key={item.value}
                   onClick={() => handleLanguageChange(item.value)}
-                  className={`cursor-pointer ${lang === item.value ? 'bg-[#EDE8F5]' : ''}`}
+                  className={`cursor-pointer ${lang === item.value ? 'bg-[#FFB6D2] text-[#FF5CBF]' : ''}`}
                 >
                   {item.text}
                 </DropdownMenuItem>
@@ -150,7 +151,7 @@ const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="text-white p-2 rounded-md hover:bg-[#7091E6] transition-colors duration-200"
+                className="text-[#FF5CBF] p-2 rounded-md hover:bg-[#FFB6D2] hover:text-white transition-colors duration-200"
                 aria-label="Menu"
               >
                 <Menu size={24} />
@@ -163,6 +164,11 @@ const Navbar = () => {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
+                <Link to="/t-shirt" className={getMobileLinkClass('/t-shirt')}>
+                  {t('nav-t-shirt')}
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <Link to="/workshops" className={getMobileLinkClass('/workshops')}>
                   {t('nav-workshops')}
                 </Link>
@@ -170,11 +176,6 @@ const Navbar = () => {
               <DropdownMenuItem asChild>
                 <Link to="/feedback" className={getMobileLinkClass('/feedback')}>
                   {t('nav-feedback')}
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/contact" className={getMobileLinkClass('/contact')}>
-                  {t('nav-contact')}
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
